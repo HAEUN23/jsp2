@@ -33,4 +33,10 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 
+	@Override
+	public Map<String, String> selectUser(Map hm) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
