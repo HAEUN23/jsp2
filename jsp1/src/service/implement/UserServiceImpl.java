@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 			sql += " values(?,?,?,?)";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, (String)hm.get("id"));
-			ps.setString(2, (String)hm.get("password"));
+			ps.setString(2, (String)hm.get("pwd"));
 			ps.setString(3, (String)hm.get("name"));
 			ps.setString(4, (String)hm.get("hobby"));
 			int row = ps.executeUpdate();

@@ -39,6 +39,7 @@
 		<td colspan="2" align="center"><input type="submit" value="회원가입"></td>
 	</tr>
 </table>
+<input type="hidden" name="command" value="signin">
 </form>
 </body>
 </html>
