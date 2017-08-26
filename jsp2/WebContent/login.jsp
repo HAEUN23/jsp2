@@ -10,20 +10,21 @@
 <body>
 <%=request.getParameter("id")%>
 <%
-String login = "false";
-if(session.getAttribute("login")!=null){
-	login = (String)session.getAttribute("login");
+String login = null;
+if(session.getAttribute("id")!=null){
+	login = (String)session.getAttribute("id");
 }
-if(login.equals("false")){
+if(login==null){
 %>
-<form action="login_ok.jsp" >
-아이디 : <input type="text" name="id1" id="id"><br>
-비밀번호 : <input type="password" name="pwd1" id="pwd"><br>
-비밀번호 : <input type="password" name="pwd1" id="pwd"><br>
+111
+<form action="login.user" method="post">
+아이디 : <input type="text" name="id" id="id"><br>
+비밀번호 : <input type="password" name="pwd" id="pwd"><br>
+<input type="hidden" name="command" value="login">
 <input type="submit" value="로그인">
 </form>
 <%
-}else if(login.equals("true")){
+}else {
 	out.println(session.getAttribute("id") + "님 환영합니다.");
 }
 %>
