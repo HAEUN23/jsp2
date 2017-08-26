@@ -4,12 +4,37 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script>
+function checkValue(){
+	
+	var chObj = document.getElementById("sel");
+	if(chObj.checked){
+		var num1Obj = document.getElementById("num1");
+		var opObj = document.getElementById("op");
+		var num2Obj = document.getElementById("num2");
+		//validation
+		if(num1Obj.value==""){
+			alert("num1이 빈문자값입니다.");
+			num1Obj.focus();
+			return;
+		}
+		var params = {};
+		params["num1"] = num1Obj.value;
+		params["op"] = opObj.value;
+		params["num2"] = num2Obj.value;
+		var jsonString = JSON.stringify(params);
+		alert(jsonString);
+		
+	}
+}
+</script>
 <body>
 <form action="cal.jsp">
-숫자1 : <input type="text" name="num1">
-연산자 : <input type="text" name="op">
-숫자2 : <input type="text" name="num2">
-<input type="submit" value="계산">
+체크 : <input type="checkbox" name="sel" id="sel">
+숫자1 : <input type="text" name="num1" id="num1">
+연산자 : <input type="text" name="op" id="op">
+숫자2 : <input type="text" name="num2" id="num2">
+<input type="button" value="계산" onclick="checkValue()">
 </form>
 </body>
 </html>

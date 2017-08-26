@@ -28,7 +28,8 @@ try {
 	Class.forName("org.mariadb.jdbc.Driver");
 	con = DriverManager.getConnection(dbUrl,dbId,dbPwd);
 	System.out.println("연결 성공");
-	String sql = "select * from user where id=?";
+	String sql = "select * from user";
+	sql += " where id=?";
 	ps = con.prepareStatement(sql);
 	ps.setString(1 , id);
 	ResultSet rs = ps.executeQuery();
@@ -47,6 +48,7 @@ try {
 	e.printStackTrace();
 }
 
+out.print(result);
 boolean login = false;
 %>
 <script>
