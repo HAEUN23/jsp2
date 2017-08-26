@@ -2,16 +2,23 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import common.DBConnector;
+import service.UserService;
+import service.implement.UserServiceImpl;
 
 public class UserServlet extends CommonServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private UserService us = new UserServiceImpl();
+	
 	public void doPost(HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -24,24 +31,12 @@ public class UserServlet extends CommonServlet {
 			hobby += h + ",";
 		}
 		hobby = hobby.substring(0, hobby.length()-1);
-		String result = name + "님 뭔 이윤지는 모르겄는디 회원가입 실패했어요.";
-		Connection con;
-		try {
-			con = DBConnector.getCon();
-			String sql = "insert into user(id,password,name,hobby)";
-			sql += " values(?,?,?,?)";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, id);
-			ps.setString(2, pwd);
-			ps.setString(3, name);
-			ps.setString(4, hobby);
-			int row = ps.executeUpdate();
-			if(row==1) {
-				result = name + "님 회원가입에 성공하셨습니다.";
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+		Map<String, String> hm = new HashMap<String, String>();
+		hm.put("id", id);
+		hm.put("pwd", pwd);
+		hm.put("name", name);
+		hm.put("hobby", hobby);
+		String result = us.insertUser(hm);
 		doProcess(resp, result);
 	}
 
