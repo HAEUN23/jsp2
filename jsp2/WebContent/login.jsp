@@ -50,7 +50,7 @@ if(user==null){
 <input type="button" value="로그아웃">
 <input type="button" value="회원탈퇴">
 <input type="button" value="회원정보수정">
-<input type="hidden" name="command" value="logout">
+<input type="hidden" name="command" id="command" value="logout">
 <input type="hidden" name="userNo" value="<%=userNo%>">
 </form>
 <%
