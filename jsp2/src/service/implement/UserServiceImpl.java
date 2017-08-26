@@ -69,5 +69,19 @@ public class UserServiceImpl implements UserService {
 		resultMap.put("result", result);
 		return resultMap;
 	}
-
+	public int deleteUser(Map<String, String>hm) {
+		Connection con;
+		try {
+			con = DBConnector.getCon();
+			String sql = "delete from user";
+			sql += " where user_no=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, hm.get("user_no"));
+			int row = ps.executeUpdate();
+			return row;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }

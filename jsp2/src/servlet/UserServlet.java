@@ -56,6 +56,23 @@ public class UserServlet extends CommonServlet {
 					session.setAttribute("user", resultMap);
 				}
 				doProcess(resp, resultMap.get("result"));
+			}else if(command.equals("logout")) {
+				HttpSession session = request.getSession();
+				session.invalidate();
+				resp.sendRedirect("/login.jsp");
+			}else if(command.equals("delete")) {
+				String userNo = request.getParameter("userNo");
+				Map<String, String> hm = new HashMap<String, String>();
+				hm.put("user_no", userNo);
+				int rCnt = us.deleteUser(hm);
+				String result ="회원탈퇴에 실패하셨습니다.";
+				if(rCnt==1) {
+					result = "회원탈퇴에 성공하셨습니다.";
+					result += "<script>";
+					result += "alert('회원탈퇴에 성공하셨습니다.');";
+					result += "</script>";
+				}
+				doProcess(resp, result);
 			}
 		}
 	}
