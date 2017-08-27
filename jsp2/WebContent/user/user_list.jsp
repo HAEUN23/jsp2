@@ -25,7 +25,7 @@ try {
 	con = DriverManager.getConnection(url,id,pwd);
 	System.out.println("연결 성공");
 	st = con.createStatement();
-	ResultSet rs = st.executeQuery("select * from user where id='red'");
+	ResultSet rs = st.executeQuery("select * from user");
 	out.println("<table border='1'>");
 	while(rs.next()) {
 		out.println("<tr>");
