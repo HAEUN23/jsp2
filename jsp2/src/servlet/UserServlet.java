@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -72,6 +73,40 @@ public class UserServlet extends CommonServlet {
 					result += "alert('회원탈퇴에 성공하셨습니다.');";
 					result += "</script>";
 				}
+				doProcess(resp, result);
+			}else if(command.equals("update")) {
+				String id = request.getParameter("id");
+				String pwd = request.getParameter("pwd");
+				String name = request.getParameter("name");
+				String[] hobbies = request.getParameterValues("hobby");
+				String hobby ="";
+				for(String h : hobbies) {
+					hobby += h + ",";
+				}
+				hobby = hobby.substring(0, hobby.length()-1);
+				Map<String, String> hm = new HashMap<String, String>();
+				hm.put("id", id);
+				hm.put("pwd", pwd);
+				hm.put("name", name);
+				hm.put("hobby", hobby);
+				int rCnt = us.updateUser(hm);
+				String result = "회원 정보 수정이 실패했습니다. 다시 해보세요";
+				if(rCnt==1) {
+					result = "회원 정보 수정이 성공했습니다.";
+				}
+				doProcess(resp, result);
+			}else if(command.equals("list")) {
+				Map<String, String> hm = new HashMap<String, String>();
+				List<Map<String,String>> userList = us.selectUserList(hm);
+				String result = "<table border='1'>";
+				for(Map<String,String> m : userList) {
+					result += "<tr>";
+					result += "<td>" + m.get("name") +"</td>";
+					result += "<td>" + m.get("id") +"</td>";
+					result += "<td>" + m.get("hobby") +"</td>";
+					result += "</tr>";
+				}
+				result += "</table>";
 				doProcess(resp, result);
 			}
 		}

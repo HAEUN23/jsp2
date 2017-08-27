@@ -16,6 +16,9 @@ $(document).ready(function(){
 		var value = this.value;
 		if(value=="회원탈퇴"){
 			$("#command").val("delete");
+		}else if(value=="회원정보수정"){
+			location.href = "/user/update.jsp";
+			return;
 		}
 		this.form.submit();
 	})
