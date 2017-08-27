@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="/js/jquery-3.2.1.min.js"></script>
-<%
+<% 
 Map<String,String> user = null;
 if(session.getAttribute("user")!=null){
 	user = (Map<String,String>)session.getAttribute("user");

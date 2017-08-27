@@ -58,7 +58,7 @@ public class UserServlet extends CommonServlet {
 					HttpSession session = request.getSession();
 					session.setAttribute("user", resultMap);
 					url = "location.href='/main.jsp'";
-				}
+				} 
 				String result = "<script>";
 				 result += "alert('" + resultMap.get("result") +"');";
 				 result += url;

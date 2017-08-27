@@ -22,6 +22,7 @@ $(document).ready(function(){
 </script>
 <body>
 <%
+if(user!=null){
 	String id = user.get("id");
 	String userNo = user.get("user_no");
 	String name = user.get("name");
@@ -39,5 +40,8 @@ $(document).ready(function(){
 <input type="hidden" name="command" id="command" value="logout">
 <input type="hidden" name="userNo" value="<%=userNo%>">
 </form>
+<%
+}
+%>
 </body>
 </html>
