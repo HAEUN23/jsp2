@@ -7,28 +7,15 @@
 <title>Insert title here</title>
 </head>
 <script>
-var test = function(){
-	this.a = "123";
-	var b = "456";
-	this.tt = function(){
-		alert(b);
-		alert("아~");
-	}
-	var tt2 = function(){
-		alert("tt2");
-	}
-	this.arr = {};
-	this.arr["key1"] = "value1";
-	this.arr["key2"] = "value2";
-	this.arr.key3 = "value3";
-	this.json = JSON.stringify(this.arr);
+
+var func1 = function(func){
+	this.test = func;
 }
 
-function test1(){
-	var t = new test();
-	var obj = JSON.parse(t.json);
-	alert(obj.key1);
-}
+var f = new func1(function(){
+	alert(1);
+});
+f.test();
 </script>
 <body>
 <input type="button" value="click" onclick="test1()">
