@@ -102,17 +102,32 @@ $(document).ready(function(){
 		
 		param = "?command=login&param=" + JSON.stringify(param);
 		param = encodeURI(param);
-		var au = new AjaxUtil("test.user",param,"post");
+		var au = new AjaxUtil("test.user",param,"get",false);
 		au.changeCallBack(callback);
 		au.send();
 	});
 })
-function callback(result){
+
+function callback2(result){
 	var re = JSON.parse(result);
-	alert(re.msg);
+	alert(re.result);
+	location.href = re.url;
+}
+function callback(result){
+	var idValue = $("#id").val().trim();
+	var pwdValue = $("#pwd").val().trim();
+	var param = {};
+	param["id"] = idValue;
+	param["pwd"] = pwdValue;
+	
+	param = "?command=login&param=" + JSON.stringify(param);
+	param = encodeURI(param);
+	var au1 = new AjaxUtil("test.user",param,"post",false);
+	au1.changeCallBack(callback2);
+	au1.send();
 }
 </script>
-<form action="login.user" method="post">
+<form action="login.user" method="get">
 아이디 : <input type="text" name="id" id="id"><br>
 비밀번호 : <input type="password" name="pwd" id="pwd"><br>
 <input type="hidden" name="command"  id="command" value="login">
