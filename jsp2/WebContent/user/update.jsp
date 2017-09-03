@@ -4,8 +4,10 @@
 <title>회원정보 수정</title>
 </head>
 <body>
-<script src="/js/jquery-3.2.1.min.js"></script>
 <script>
+$(document).ready(function(){
+	
+})
 function check(){
 	var nameValue = $("#name").val().trim();
 	var pwdValue = $("#pwd").val().trim();

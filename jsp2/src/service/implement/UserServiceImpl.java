@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserService {
 		return resultMap;
 	}
 	public int deleteUser(Map<String, String>hm) {
-		Connection con;
+		Connection con = null;
 		try {
 			con = DBConnector.getCon();
 			String sql = "delete from user";
@@ -100,16 +100,38 @@ public class UserServiceImpl implements UserService {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, hm.get("user_no"));
 			int row = ps.executeUpdate();
+			if(row==1) {
+				con.commit();
+			}else {
+				con.rollback();
+			}
 			return row;
-		}catch(Exception e) {
+		}catch (ClassNotFoundException e) {
 			e.printStackTrace();
+		}catch(SQLException e) {
+			if(con!=null) {
+				try {
+					con.rollback();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				DBConnector.closeCon();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return 0;
 	}
 
 	@Override
 	public int updateUser(Map<String, String> hm) {
-		Connection con;
+		Connection con = null;
 		try {
 			con = DBConnector.getCon();
 			String sql = "update user";
@@ -123,9 +145,31 @@ public class UserServiceImpl implements UserService {
 			ps.setString(3, hm.get("hobby"));
 			ps.setString(4, hm.get("user_no"));
 			int row = ps.executeUpdate();
+			if(row==1) {
+				con.commit();
+			}else {
+				con.rollback();
+			}
 			return row;
-		}catch(Exception e) {
+		}catch (ClassNotFoundException e) {
 			e.printStackTrace();
+		}catch(SQLException e) {
+			if(con!=null) {
+				try {
+					con.rollback();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				DBConnector.closeCon();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return 0;
 	}
