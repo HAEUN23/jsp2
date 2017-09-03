@@ -9,7 +9,7 @@ $(document).ready(function(){
 		var value = this.value;
 		var url = this.getAttribute("data-url");
 		var urls = url.split(".");
-		if(urls[1]=="jsp"){
+		if(urls[1].indexOf("jsp")!=-1){
 			location.href = url;
 		}else{
 			$("#command").val(urls[0]);
@@ -33,7 +33,7 @@ if(user!=null){
 <form action="some.user" method="post">
 <input type="button" value="로그아웃" data-url="logout.user">
 <input type="button" value="회원탈퇴" data-url="delete.user">
-<input type="button" value="회원정보수정" data-url="/user/update.jsp">
+<input type="button" value="회원정보수정" data-url="/user/update.jsp?user_no=<%=userNo%>">
 <input type="button" value="회원리스트" data-url="/user/list.jsp">
 <input type="button" value="게시판가기"  data-url="/board/board_list.jsp">
 <input type="hidden" name="command" id="command" value="logout">

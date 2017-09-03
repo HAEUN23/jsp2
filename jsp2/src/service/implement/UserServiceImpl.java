@@ -63,6 +63,34 @@ public class UserServiceImpl implements UserService {
 		Connection con;
 		PreparedStatement ps;
 		Map<String, String> resultMap = new HashMap<String, String>();
+		try {
+			con = DBConnector.getCon();
+			System.out.println("연결 성공");
+			String sql = "select * from user";
+			sql += " where user_no=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1 , hm.get("user_no"));
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				resultMap.put("id", rs.getString("id"));
+				resultMap.put("name", rs.getString("name"));
+				resultMap.put("hobby", rs.getString("hobby"));
+				resultMap.put("user_no", rs.getString("user_no"));
+				resultMap.put("admin", rs.getString("admin"));
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return resultMap;
+	}
+
+	@Override
+	public Map<String, String> loginUser(Map<String, String>  hm) {
+		Connection con;
+		PreparedStatement ps;
+		Map<String, String> resultMap = new HashMap<String, String>();
 		String result=hm.get("id") + "는 없는 아이디 입니다.";
 		try {
 			con = DBConnector.getCon();
@@ -78,6 +106,7 @@ public class UserServiceImpl implements UserService {
 					resultMap.put("name", rs.getString("name"));
 					resultMap.put("hobby", rs.getString("hobby"));
 					resultMap.put("user_no", rs.getString("user_no"));
+					resultMap.put("admin", rs.getString("admin"));
 					result = "로그인 성공하셨네요";
 				}else{
 					result = "비밀번호가 틀리셨습니다.";

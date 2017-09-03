@@ -51,7 +51,7 @@ public class UserServlet extends CommonServlet {
 			}else if(command.equals("login")) {
 				String param = request.getParameter("param");
 				Map<String, String> hm = g.fromJson(param,HashMap.class);
-				Map<String, String> resultMap = us.selectUser(hm);
+				Map<String, String> resultMap = us.loginUser(hm);
 				String url = "/user/login.jsp";
 				if(resultMap.get("id")!=null) {
 					HttpSession session = request.getSession();
@@ -113,6 +113,12 @@ public class UserServlet extends CommonServlet {
 					result += "</tr>";
 				}
 				result += "</table>";
+				doProcess(resp, result);
+			}else if(command.equals("view")) {
+				String param = request.getParameter("param");
+				Map<String, String> hm = g.fromJson(param,HashMap.class);
+				Map<String, String> rHm = us.selectUser(hm);
+				String result = g.toJson(rHm);
 				doProcess(resp, result);
 			}
 		}

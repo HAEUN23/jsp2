@@ -6,8 +6,17 @@
 <body>
 <script>
 $(document).ready(function(){
-	
+	var params = {};
+	params["user_no"] = "<%=request.getParameter("user_no")%>";
+	params = "?command=view&param=" + JSON.stringify(params);
+	params = encodeURI(params);
+	var au = new AjaxUtil("update.user",params,"post");
+	au.changeCallBack(callback);
+	au.send();
 })
+function callback(result){
+	alert(result);
+}
 function check(){
 	var nameValue = $("#name").val().trim();
 	var pwdValue = $("#pwd").val().trim();
