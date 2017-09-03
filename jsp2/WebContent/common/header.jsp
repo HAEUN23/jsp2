@@ -9,6 +9,7 @@
 <script src="/js/jquery-3.2.1.min.js"></script>
 <script src="/js/AjaxUtil.js"></script>
 <% 
+boolean debugMod = true;
 String urlStr = request.getRequestURL().toString();
 Map<String,String> user = null;
 if(session.getAttribute("user")!=null){
