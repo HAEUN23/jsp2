@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
 	public String insertUser(Map<String, String>  hm) {
 
 		String result = hm.get("name") + "님 뭔 이윤지는 모르겄는디 회원가입 실패했어요.";
-		Connection con;
+		Connection con = null;
 		try {
 			con = DBConnector.getCon();
 			String sql = "insert into user(id,password,name,hobby)";
@@ -30,10 +30,30 @@ public class UserServiceImpl implements UserService {
 			ps.setString(4, hm.get("hobby"));
 			int row = ps.executeUpdate();
 			if(row==1) {
+				con.commit();
 				result = hm.get("name") + "님 회원가입에 성공하셨습니다.";
+			}else {
+				con.rollback();
 			}
-		}catch(Exception e) {
+		}catch (ClassNotFoundException e) {
 			e.printStackTrace();
+		}catch(SQLException e) {
+			if(con!=null) {
+				try {
+					con.rollback();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				DBConnector.closeCon();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
