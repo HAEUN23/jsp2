@@ -72,7 +72,7 @@ function check(){
 			게임<input type="checkbox" name="hobby" value="게임" >
 			요리<input type="checkbox" name="hobby" value="요리">
 			여행<input type="checkbox" name="hobby" value="여행">
-		</td> 
+		</td>  
 	</tr>
 	<tr>
 		<td colspan="2" align="center"><input type="submit" value="회원정보수정"></td>
