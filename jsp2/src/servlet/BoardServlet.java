@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,16 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import service.UserService;
-import service.implement.UserServiceImpl;
+import dto.Board;
+import service.BoardService;
+import service.implement.BoardServiceImpl;
 
 public class BoardServlet extends CommonServlet {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private UserService us = new UserServiceImpl();
+	private BoardService bs = new BoardServiceImpl();
 	private Gson g = new Gson();
+	
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -27,7 +30,8 @@ public class BoardServlet extends CommonServlet {
 		String command = request.getParameter("command");
 		if(command.equals("list")) {
 			RequestDispatcher rd = request.getRequestDispatcher("/board/board_list.jsp");
-			request.setAttribute("test", "내가 보드야!!");
+			List<Board> boardList = bs.selectBoardList();
+			request.setAttribute("boardList", boardList);
 			rd.forward(request, resp);
 		}
 	}

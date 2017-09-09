@@ -1,14 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<%@ include file="/common/header.jsp" %>
+<title>게시판</title>
 </head>
 <body>
-${test123}
-<%=request.getAttribute("test")%>
+<table border='1'>
+	<tr>
+		<td>번호</td>
+		<td>이름</td>
+		<td>내용</td>
+		<td>생성자</td>
+		<td>생성일자</td>
+	</tr>
+	<c:forEach items="${boardList}"  var="b" >
+		<tr>
+			<td>${b.bNum}</td>
+			<td>${b.title}</td>
+			<td>${b.content}</td>
+			<td>${b.writer}</td>
+			<td>${b.regDate}</td>
+		</tr>
+	</c:forEach>
+</table>
 게시판리스트입니다.
 </body>
 </html>
