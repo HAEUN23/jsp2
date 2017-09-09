@@ -29,16 +29,22 @@ public class BoardServlet extends CommonServlet {
 		request.setCharacterEncoding("utf-8");
 		String command = request.getParameter("command");
 		if(command.equals("list")) {
-			RequestDispatcher rd = request.getRequestDispatcher("/board/board_list.jsp");
 			List<Board> boardList = bs.selectBoardList();
-			request.setAttribute("boardList", boardList);
-			rd.forward(request, resp);
+			String result = g.toJson(boardList);
+			doProcess(resp, result);
 		}
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException {
 		resp.setContentType("text/html;charset=utf-8");
+		String command = request.getParameter("command");
+		if(command.equals("list")) {
+			RequestDispatcher rd = request.getRequestDispatcher("/board/board_list.jsp");
+			List<Board> boardList = bs.selectBoardList();
+			request.setAttribute("boardList", boardList);
+			rd.forward(request, resp);
+		}
 	}	
 	public void doProcess(HttpServletResponse resp, String writeStr) 
 			throws IOException {
