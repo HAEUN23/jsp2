@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-${test}
+${test123}
 <%=request.getAttribute("test")%>
 게시판리스트입니다.
 </body>
