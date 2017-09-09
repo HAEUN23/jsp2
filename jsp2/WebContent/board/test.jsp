@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-${test}
-<%=request.getAttribute("test")%>
-게시판리스트입니다.
+<form action="list.board" method="post">
+<input type="hidden" name="command" value="list"/>
+<input type="submit" value="가자!"/>
+</form>
 </body>
 </html>
