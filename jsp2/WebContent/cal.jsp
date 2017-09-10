@@ -16,28 +16,9 @@
 </head>
 <body>
 <%
-int num1 = Integer.parseInt(request.getParameter("num1"));
-String op = request.getParameter("op");
-int num2 = Integer.parseInt(request.getParameter("num2"));
-
-int result = 0;
-if(op.equals("+")){
-	result = num1 + num2;
-}else if(op.equals("/")){
-	result = num1 / num2;
-}else if(op.equals("*")){
-	result = num1 * num2;
-}else if(op.equals("-")){
-	result = num1 - num2;
-}
-List<String> list = new ArrayList<String>();
-for(int i=1, max=10;i<=max;i++){
-	list.add("" + (i*10));
-}
-for(String str : list){
-	out.println(str + "<br>");
-}
-out.write(num1 + " " + op + " " +num2+" = " +result);
+out.println(request); 
+out.println(session.getId());
+ 
 %>
 </body>
 </html>

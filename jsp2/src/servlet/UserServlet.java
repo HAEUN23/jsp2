@@ -54,9 +54,12 @@ public class UserServlet extends CommonServlet {
 				Map<String, String> resultMap = us.loginUser(hm);
 				String url = "/user/login.jsp";
 				if(resultMap.get("id")!=null) {
+					
 					HttpSession session = request.getSession();
+					System.out.println(session);
+					System.out.println("sessionId : " + session.getId());
 					session.setAttribute("user", resultMap);
-					url = "/main.jsp";
+					url = "/main.jsp"; 
 				} 
 				resultMap.put("url", url);
 				String result = g.toJson(resultMap);
