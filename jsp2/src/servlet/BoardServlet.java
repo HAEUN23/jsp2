@@ -1,8 +1,11 @@
 package servlet;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,7 +30,19 @@ public class BoardServlet extends CommonServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		
 		String command = request.getParameter("command");
+		if(command==null) {
+			BufferedReader br = request.getReader();
+			String jsonStr = "";
+			String s = null;
+			while((s=br.readLine())!=null) {
+				jsonStr += s;
+			}
+			Map<String, String> pMap = g.fromJson(jsonStr, HashMap.class);
+			System.out.println(pMap);
+			command = pMap.get("command");
+		}
 		if(command.equals("list")) {
 			List<Board> boardList = bs.selectBoardList();
 			String result = g.toJson(boardList);
