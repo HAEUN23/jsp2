@@ -6,6 +6,14 @@ public class Board {
 	private String content;
 	private String regDate;
 	private int writer;
+	private String userName;
+	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public int getbNum() {
 		return bNum;
 	}
@@ -39,7 +47,6 @@ public class Board {
 	@Override
 	public String toString() {
 		return "Board [bNum=" + bNum + ", title=" + title + ", content=" + content + ", regDate=" + regDate
-				+ ", writer=" + writer + "]";
+				+ ", writer=" + writer + ", userName=" + userName + "]";
 	}
-	
 }

@@ -4,9 +4,13 @@
 <title>게시판</title>
 <script>
 	function callback(result) {
+		if(result.error){
+			alert(result.error);
+			return;
+		}
 		$("#table").bootstrapTable(
 			{data : result}
-		);
+		); 
 	}
 	
 	function getBoardList(content){
@@ -46,8 +50,9 @@
 			<tr>
 				<th data-field="bNum" class="text-center">번호</th>
 				<th data-field="title" class="text-center">제목</th>
-				<th data-field="regDate" class="text-center">게시일자</th>
 				<th data-field="writer" class="text-center">게시자</th>
+				<th data-field="userName" class="text-center">게시자명</th>
+				<th data-field="regDate" class="text-center">게시일자</th>
 				<th data-field="content" class="text-center">내용</th>
 			</tr>
 		</thead>

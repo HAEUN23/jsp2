@@ -32,6 +32,7 @@ public class BoardServlet extends CommonServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		String command = request.getParameter("command");
+		String content = "";
 		if(command==null) {
 			BufferedReader br = request.getReader();
 			String jsonStr = "";
@@ -42,11 +43,21 @@ public class BoardServlet extends CommonServlet {
 			Map<String, String> pMap = g.fromJson(jsonStr, HashMap.class);
 			System.out.println(pMap);
 			command = pMap.get("command");
+			content = pMap.get("content");
 		}
 		if(command.equals("list")) {
-			List<Board> boardList = bs.selectBoardList();
-			String result = g.toJson(boardList);
-			doProcess(resp, result);
+			if(content!=null && !content.equals("")) {
+				if(content.trim().length()==1) {
+					Map<String, String> map = new HashMap<String, String>();
+					map.put("error", "한글자로 검색하지 말라고!!");
+					String result = g.toJson(map);
+					doProcess(resp, result);
+				}
+			}else {
+				List<Board> boardList = bs.selectBoardList();
+				String result = g.toJson(boardList);
+				doProcess(resp, result);
+			}
 		}
 	}
 

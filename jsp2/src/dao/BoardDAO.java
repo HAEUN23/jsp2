@@ -15,7 +15,8 @@ public class BoardDAO {
 
 	public List<Board> selectBoardList(Connection con) throws SQLException{
 		List<Board> boardList = new ArrayList<Board>();
-		String sql = "select * from board";
+		String sql = "select b.*, u.name from board as b, user as u" + 
+				" where b.writer=u.user_no";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		while(rs.next()) {
@@ -25,6 +26,7 @@ public class BoardDAO {
 			b.setWriter(rs.getInt("writer"));
 			b.setContent(rs.getString("content"));
 			b.setRegDate(rs.getString("reg_Date"));
+			b.setUserName(rs.getString("name"));
 			boardList.add(b);
 		}
 		return boardList;
