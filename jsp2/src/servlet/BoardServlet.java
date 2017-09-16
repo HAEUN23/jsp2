@@ -38,21 +38,21 @@ public class BoardServlet extends CommonServlet {
 		System.out.println(pMap);
 		String command = pMap.get("command");
 		String content = pMap.get("content");
-		
+		String result= "";
+		Map<String, Object> map = new HashMap<String, Object>();
 		if(command.equals("list")) {
-			if(content!=null && !content.equals("")) {
-				if(content.trim().length()==1) {
-					Map<String, String> map = new HashMap<String, String>();
-					map.put("error", "한글자로 검색하지 말라고!!");
-					String result = g.toJson(map);
-					doProcess(resp, result);
-				}
+			if(content!=null && content.trim().length()<=1) {
+				map.put("error", "한글자로 검색하지 말라고!!");
+				result = g.toJson(map);
 			}else {
-				List<Board> boardList = bs.selectBoardList();
-				String result = g.toJson(boardList);
-				doProcess(resp, result);
+				List<Board> boardList = bs.selectBoardList(pMap,p);
+				map.put("list", boardList);
+				map.put("page", p);
+				map.put("param", pMap);
+				result = g.toJson(map);
 			}
 		}
+		doProcess(resp, result);
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse resp)
@@ -61,7 +61,7 @@ public class BoardServlet extends CommonServlet {
 		String command = request.getParameter("command");
 		if(command.equals("list")) {
 			RequestDispatcher rd = request.getRequestDispatcher("/board/board_list.jsp");
-			List<Board> boardList = bs.selectBoardList();
+			List<Board> boardList = bs.selectBoardList(null,null);
 			request.setAttribute("boardList", boardList);
 			rd.forward(request, resp);
 		}

@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import dto.Board;
+import dto.Page;
 
 public interface BoardService {
-	List<Board> selectBoardList();
+	List<Board> selectBoardList(Map<String, String> pHm, Page p);
 	Map<String, String> selectBoard();
 	int insertBoard();
 	int updateBoard();
