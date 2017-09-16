@@ -8,7 +8,7 @@ var JqAjax = function(p_url,p_param,p_type,p_d_type){
  	    	    ,   url      : p_url ? p_url 		: "list.board"
  	    	    ,   dataType : p_d_type ? p_d_type 	:"json" 
  	    	    ,   beforeSend: function(xhr) {
- 	    	        xhr.setRequestHeader("Content-Type", "application/json");
+ 	    	        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
  	    	    }
  	    	    ,   data     : p_param
  	    	    ,   success : function(result){

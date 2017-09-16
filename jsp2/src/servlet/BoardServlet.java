@@ -1,6 +1,5 @@
 package servlet;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -15,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import dto.Board;
+import dto.Page;
 import service.BoardService;
 import service.implement.BoardServiceImpl;
 
@@ -31,20 +31,14 @@ public class BoardServlet extends CommonServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		String command = request.getParameter("command");
-		String content = "";
-		if(command==null) {
-			BufferedReader br = request.getReader();
-			String jsonStr = "";
-			String s = null;
-			while((s=br.readLine())!=null) {
-				jsonStr += s;
-			}
-			Map<String, String> pMap = g.fromJson(jsonStr, HashMap.class);
-			System.out.println(pMap);
-			command = pMap.get("command");
-			content = pMap.get("content");
-		}
+		String param = request.getParameter("param");
+		String page = request.getParameter("page");
+		Map<String, String> pMap = g.fromJson(param, HashMap.class);
+		Page p = g.fromJson(page, Page.class);
+		System.out.println(pMap);
+		String command = pMap.get("command");
+		String content = pMap.get("content");
+		
 		if(command.equals("list")) {
 			if(content!=null && !content.equals("")) {
 				if(content.trim().length()==1) {

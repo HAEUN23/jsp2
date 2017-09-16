@@ -19,7 +19,10 @@
 		if(content){
 			param["content"] = content;
 		}
-		param = JSON.stringify(param);
+		var page = {};
+		page["nowPage"] = 1;
+		param = "param=" + JSON.stringify(param);
+		param += "&page=" + JSON.stringify(page);
 		var ja = new JqAjax("list.board",param);
 		ja.changeFunc(callback);
 		ja.send();
