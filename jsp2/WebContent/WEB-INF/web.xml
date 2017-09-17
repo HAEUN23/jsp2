@@ -33,4 +33,13 @@
     <servlet-name>board</servlet-name>
     <url-pattern>*.board</url-pattern>
   </servlet-mapping>
+  
+  <filter>
+  	<filter-name>exam1</filter-name>
+  	<filter-class>filter.ExamFilter1</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>exam1</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
 </web-app>
