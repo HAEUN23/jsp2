@@ -29,8 +29,6 @@ public class BoardServlet extends CommonServlet {
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		
 		String param = request.getParameter("param");
 		String page = request.getParameter("page");
 		Map<String, String> pMap = g.fromJson(param, HashMap.class);
@@ -57,6 +55,7 @@ public class BoardServlet extends CommonServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException {
+		System.out.println("Servlet : " + this.getClass().getName());
 		resp.setContentType("text/html;charset=utf-8");
 		String command = request.getParameter("command");
 		if(command.equals("list")) {
@@ -68,7 +67,6 @@ public class BoardServlet extends CommonServlet {
 	}	
 	public void doProcess(HttpServletResponse resp, String writeStr) 
 			throws IOException {
-		resp.setContentType("text/html;charset=utf-8");
 		PrintWriter out = resp.getWriter();
 		out.print(writeStr);
 	}

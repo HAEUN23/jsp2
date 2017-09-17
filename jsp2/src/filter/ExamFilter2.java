@@ -8,6 +8,8 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class ExamFilter2 implements Filter{
 
@@ -20,6 +22,13 @@ public class ExamFilter2 implements Filter{
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain fc)
 			throws IOException, ServletException {
 		System.out.println("doFilter2" + fc);
+		HttpServletRequest request = (HttpServletRequest) req;
+		HttpSession session  = request.getSession();
+		if(session.getAttribute("user")==null) {
+			System.out.println("그딴거 없어!!!!!!");
+		}else {
+			System.out.println("있네?");
+		}
 		fc.doFilter(req, res);
 	}
 

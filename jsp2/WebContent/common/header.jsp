@@ -22,12 +22,6 @@ String urlStr = request.getRequestURL().toString();
 Map<String,String> user = null;
 if(session.getAttribute("user")!=null){
 	user = (Map<String,String>)session.getAttribute("user");
-}else if(urlStr.indexOf("/user/login")==-1){
-%>
-<script>
-	location.href="/user/login.jsp";
-</script>
-<%	
 }
 
 %>
